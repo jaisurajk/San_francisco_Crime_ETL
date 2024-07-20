@@ -1,0 +1,18 @@
+name: "San Francisco Crime ETL"
+config: 
+  days_delta: 7
+  limit: 1000
+  holidays_begin_date: "2023-01-01"
+  holidays_end_date: "2024-12-31" 
+  holidays_data_path: 'San_Francisco_crime/app/data/holiday.csv'
+  police_station_data_path: 'San_Francisco_crime/app/data/police_stations.csv'
+  chunksize: 1000
+  sql_folder_path: "San_Francisco_crime/sql" 
+  log_folder_path: "San_Francisco_crime/logs"
+  crime_table_name: "crime_data"
+  logs_table_name: "logs"
+schedule:
+  run_seconds: 10
+  poll_seconds: 2
+
+# Replace run_seconds with 86400, for full day
