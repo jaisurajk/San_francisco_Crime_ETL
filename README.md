@@ -1,4 +1,4 @@
-# DEC Project 1 - Chicago Crime
+# July Project 1 - San Francisco Crime
 
 ## Project Context and Goals
 
