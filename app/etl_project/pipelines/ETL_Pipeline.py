@@ -389,31 +389,7 @@ def load_data_to_postgres(chunksize:int, data:list[dict], table_name:Table, engi
         set_={c.key: c for c in insert_statement.excluded if c.key not in key_columns},
     )
     engine.execute(upsert_statement)
-    # for i in range(0, max_length, chunksize):
-    # print(max_length)
-    # print(chunksize)
-        # if i + chunksize >= max_length:
-        #     lower_bound = i
-        #     upper_bound = max_length
-        # else:
-        #     lower_bound = i
-        #     upper_bound = i + chunksize
-        # insert_statement = postgresql.insert(table).values(
-        #     data[lower_bound:upper_bound]
-        # )
-        # upsert_statement = insert_statement.on_conflict_do_update(
-        #     index_elements=key_columns,
-        #     set_={
-        #         c.key: c for c in insert_statement.excluded if c.key not in key_columns
-        #     },
-        # )
-        # print(upsert_statement)
-        # with engine.connect() as conn:
-        #     conn.execute(upsert_statement)
-        # print(conn)
-        # engine.execute(upsert_statement)
-        # engine.connect().execute(upsert_statement)
-
+    
 def create_logs_table(engine:Engine) -> Table:
     """
     Create table for pipeline metadata logs. 
@@ -473,86 +449,85 @@ if __name__=="__main__":
     if Path(yaml_file_path).exists():
         with open(yaml_file_path) as yaml_file:
             pipeline_config = yaml.safe_load(yaml_file)
-    start_time='2023-12-23T00:00:00.000' 
+    start_time='2023-12-25T00:00:00.000' 
     end_time='2023-12-31T23:59:59.999'
     APP_TOKEN = "ef0oV4r2jOuH9KGAEwWRQfrKl"
     limit = 20000
     column_name = "incident_datetime"
-    # df = extract_crime_api(APP_TOKEN, column_name, start_time, end_time, limit)
-    # # print(df)
-    # df_transform_crime = transform_crime_data(df)
-    # # print(df_transform)
-    # # print(df_transform.columns)
-    # # print(df_transform.dtypes)
-    # config = pipeline_config.get("config")
-    # police_station_data_path = config.get("police_station_data_path")
-    # df_police_extract = extract_police_station(police_station_data_path)
-    # # print(df_police_extract)
-    # # print(df_police_extract.columns)
-    # df_police_transform = transform_police_station_data(df_police_extract)
-    # # print(df_police_transform)
-    # config_holidays = pipeline_config.get("config")
-    # holidays_data_path = config_holidays.get("holidays_data_path")
-    # df_holidays_extract = extract_holidays(holidays_data_path)
-    # # print(df_holidays_extract)
-    # df_holidays_transform = transform_holidays(df_holidays_extract)
-    # # print(df_holidays_transform)
-    # # print("df_holidays_transform.columns")
-    # # print(df_holidays_transform.columns)
+    df = extract_crime_api(APP_TOKEN, column_name, start_time, end_time, limit)
+    # print(df)
+    df_transform_crime = transform_crime_data(df)
+    # print(df_transform)
+    # print(df_transform.columns)
+    # print(df_transform.dtypes)
+    config = pipeline_config.get("config")
+    police_station_data_path = config.get("police_station_data_path")
+    df_police_extract = extract_police_station(police_station_data_path)
+    # print(df_police_extract)
+    # print(df_police_extract.columns)
+    df_police_transform = transform_police_station_data(df_police_extract)
+    # print(df_police_transform)
+    config_holidays = pipeline_config.get("config")
+    holidays_data_path = config_holidays.get("holidays_data_path")
+    df_holidays_extract = extract_holidays(holidays_data_path)
+    # print(df_holidays_extract)
+    df_holidays_transform = transform_holidays(df_holidays_extract)
+    # print(df_holidays_transform)
+    # print("df_holidays_transform.columns")
+    # print(df_holidays_transform.columns)
 
-    # APP_TOKEN = os.environ.get("APP_TOKEN")
-    # DB_USERNAME = os.environ.get("DB_USERNAME")
-    # DB_PASSWORD = os.environ.get("DB_PASSWORD")
-    # SERVER_NAME = os.environ.get("SERVER_NAME")
-    # DATABASE_NAME = os.environ.get("DATABASE_NAME")
-    # PORT = os.environ.get("PORT")
+    APP_TOKEN = os.environ.get("APP_TOKEN")
+    DB_USERNAME = os.environ.get("DB_USERNAME")
+    DB_PASSWORD = os.environ.get("DB_PASSWORD")
+    SERVER_NAME = os.environ.get("SERVER_NAME")
+    DATABASE_NAME = os.environ.get("DATABASE_NAME")
+    PORT = os.environ.get("PORT")
 
-    # # Connecting to postgres
-    # engine = create_postgres_connection(
-    #     username=DB_USERNAME, 
-    #     password=DB_PASSWORD, 
-    #     host=SERVER_NAME, 
-    #     port=PORT, 
-    #     database=DATABASE_NAME)
-    # # print(engine)
-    # crime_table=create_crime_table(engine=engine)
-    # # print(crime_table)
-    # date_table = create_date_table(engine=engine)
-    # # print(date_table)
-    # police_table = create_police_table(engine=engine)
-    # # print(police_table)
-    # chunksize=config.get("chunksize")
-    # # Creating table in database for pipeline metadata logs (does not re-create table if it already exists)
-    # # logs_table = create_logs_table(engine=engine)
-    # # logs_table_name=config.get("logs_table_name")
-    # # # Extracting next run_id value to be used for writing new records to metadata logs table
-    # # run_id = get_logs_table_run_id(logs_table_name=logs_table_name, engine=engine)
-    # # Log pipeline start to logs table in postgres
-    # # pipeline_name=pipeline_config.get("name")
-    # # logs_data = create_logs_data(run_id=run_id, status="start", pipeline_name=pipeline_name, config=config, logs=None)
-    # # data = df_transform_crime.to_dict(orient='records')
-    # # load_data_to_postgres(chunksize=chunksize, data=data, table_name=crime_table, engine=engine)
+    # Connecting to postgres
+    engine = create_postgres_connection(
+        username=DB_USERNAME, 
+        password=DB_PASSWORD, 
+        host=SERVER_NAME, 
+        port=PORT, 
+        database=DATABASE_NAME)
+    # print(engine)
+    crime_table=create_crime_table(engine=engine)
+    # print(crime_table)
+    date_table = create_date_table(engine=engine)
+    # print(date_table)
+    police_table = create_police_table(engine=engine)
+    # print(police_table)
+    chunksize=config.get("chunksize")
+    # Creating table in database for pipeline metadata logs (does not re-create table if it already exists)
+    logs_table = create_logs_table(engine=engine)
+    logs_table_name=config.get("logs_table_name")
+    # # Extracting next run_id value to be used for writing new records to metadata logs table
+    # run_id = get_logs_table_run_id(logs_table_name=logs_table_name, engine=engine)
+    # Log pipeline start to logs table in postgres
+    pipeline_name=pipeline_config.get("name")
+    # logs_data = create_logs_data(run_id=run_id, status="start", pipeline_name=pipeline_name, config=config, logs=None)
+    data = df_transform_crime.to_dict(orient='records')
+    load_data_to_postgres(chunksize=chunksize, data=data, table_name=crime_table, engine=engine)
 
-    # #load police stations data from dataframe to database table 'police_stations'
-    # # data = df_police_transform.to_dict(orient='records')
-    # # print(data)
-    # # load_data_to_postgres(chunksize=chunksize, data=data, table_name=police_table, engine=engine)
+    #load police stations data from dataframe to database table 'police_stations'
+    data = df_police_transform.to_dict(orient='records')
+    load_data_to_postgres(chunksize=chunksize, data=data, table_name=police_table, engine=engine)
 
-    # #load holidays data from dataframe to database table 'holiday'
-    # # print(df_holidays_transform['date'])
-    # # data = df_holidays_transform.to_dict(orient='records')
-    # # load_data_to_postgres(chunksize=chunksize, data=data, table_name=date_table, engine=engine)
+    #load holidays data from dataframe to database table 'holiday'
+    # print(df_holidays_transform['date'])
+    data = df_holidays_transform.to_dict(orient='records')
+    load_data_to_postgres(chunksize=chunksize, data=data, table_name=date_table, engine=engine)
 
-    # print(type(df_transform_crime))
-    # data = df_transform_crime.to_dict(orient='records')
-    # # data = df_transform_crime
-    # load_data_to_postgres(chunksize=chunksize, data=data, table_name=crime_table, engine=engine)
+    print(type(df_transform_crime))
+    data = df_transform_crime.to_dict(orient='records')
+    # data = df_transform_crime
+    load_data_to_postgres(chunksize=chunksize, data=data, table_name=crime_table, engine=engine)
 
-    schedule.every(pipeline_config.get("schedule").get("run_seconds")).seconds.do(
-        run_pipeline_schedule,
-        pipeline_config=pipeline_config
-    )
-    while True:
-        schedule.run_pending()
-        time.sleep(pipeline_config.get("schedule").get("poll_seconds"))
+    # schedule.every(pipeline_config.get("schedule").get("run_seconds")).seconds.do(
+    #     run_pipeline_schedule,
+    #     pipeline_config=pipeline_config
+    # )
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(pipeline_config.get("schedule").get("poll_seconds"))
     
