@@ -13,33 +13,72 @@ import schedule
 import logging
 import time
 
-def __init__(self, pipeline_name: str, log_folder_path: str):
-    self.pipeline_name = pipeline_name
-    self.log_folder_path = log_folder_path
-    logger = logging.getLogger(pipeline_name)
-    logger.setLevel(logging.INFO)
-    self.file_path = (
-        f"{self.log_folder_path}/{time.time()}.log" 
-    )
-    file_handler = logging.FileHandler(self.file_path)
-    file_handler.setLevel(logging.INFO)
-    stream_handler = logging.StreamHandler()
-    stream_handler.setLevel(logging.INFO)
-    formatter = logging.Formatter(
-        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    )
-    file_handler.setFormatter(formatter)
-    stream_handler.setFormatter(formatter)
-    logger.addHandler(file_handler)
-    logger.addHandler(stream_handler)
-    self.logger = logger
+class PipelineLogging:
+    """
+    Creates logging object with specific format and file name to log pipeline run. 
 
-def get_logs(self) -> str:
+    Usage example:
+        PipelineLogging(pipeline_name="Chicago Crime ETL", log_folder_path="./logs")
+
+    Args:
+        pipeline_name: provide a str indicating preferred name for pipeline.
+        log_folder_path: provide a str indicating the path of the folder to which log files will be written.
     """
-    Returns contents of log file as str object.
-    """
-    with open(self.file_path, "r") as file:
-        return "".join(file.readlines())
+    def __init__(self, pipeline_name: str, log_folder_path: str):
+        self.pipeline_name = pipeline_name
+        self.log_folder_path = log_folder_path
+        logger = logging.getLogger(pipeline_name)
+        logger.setLevel(logging.INFO)
+        self.file_path = (
+            f"{self.log_folder_path}/{time.time()}.log" 
+        )
+        file_handler = logging.FileHandler(self.file_path)
+        file_handler.setLevel(logging.INFO)
+        stream_handler = logging.StreamHandler()
+        stream_handler.setLevel(logging.INFO)
+        formatter = logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        )
+        file_handler.setFormatter(formatter)
+        stream_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+        logger.addHandler(stream_handler)
+        self.logger = logger
+
+    def get_logs(self) -> str:
+        """
+        Returns contents of log file as str object.
+        """
+        with open(self.file_path, "r") as file:
+            return "".join(file.readlines())
+
+# def __init__(self, pipeline_name: str, log_folder_path: str):
+#     self.pipeline_name = pipeline_name
+#     self.log_folder_path = log_folder_path
+#     logger = logging.getLogger(pipeline_name)
+#     logger.setLevel(logging.INFO)
+#     self.file_path = (
+#         f"{self.log_folder_path}/{time.time()}.log" 
+#     )
+#     file_handler = logging.FileHandler(self.file_path)
+#     file_handler.setLevel(logging.INFO)
+#     stream_handler = logging.StreamHandler()
+#     stream_handler.setLevel(logging.INFO)
+#     formatter = logging.Formatter(
+#         "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+#     )
+#     file_handler.setFormatter(formatter)
+#     stream_handler.setFormatter(formatter)
+#     logger.addHandler(file_handler)
+#     logger.addHandler(stream_handler)
+#     self.logger = logger
+
+# def get_logs(self) -> str:
+#     """
+#     Returns contents of log file as str object.
+#     """
+#     with open(self.file_path, "r") as file:
+#         return "".join(file.readlines())
 
 def extract_crime_api(APP_TOKEN:str, column_name:str, start_time:str, end_time:str, limit:int) -> pd.DataFrame:
     # start_time='2023-11-01T00:00:00.000', 
@@ -120,6 +159,7 @@ def transform_crime_data(df: pd.DataFrame) -> pd.DataFrame:
     # print("Original columns")
     # print(df.columns)
     # Transformation 1: Drop columns
+    pipeline_logging.logger.info("Dropping columns from SFO crime dataset")
     cols_to_drop = [
         ':@computed_region_jwn9_ihcz', 
         ':@computed_region_h4ep_8xdi',
@@ -156,12 +196,14 @@ def transform_crime_data(df: pd.DataFrame) -> pd.DataFrame:
         ':updated_at':'updated_at',
         ':version':'version',
     }
+    pipeline_logging.logger.info("Renaming columns in SFO crime dataset")
     df = df.rename(columns=col_mapping)
     #df.delete row where police_district is NULL or empty
 
     # print("current columns")
     # print(df.columns)
     # new_df = df['crime_id']
+    pipeline_logging.logger.info("Creating new dataset with needed columns in SFO crime dataset")
     new_df = df[["crime_id", 
                  "incident_date", 
                  "incident_time", 
@@ -248,6 +290,7 @@ def transform_police_station_data(df: pd.DataFrame) -> pd.DataFrame:
         - ':version' -> 'version'
     """
     # Transformation 1: Drop columns
+    pipeline_logging.logger.info("Dropping columns from SFO police station dataset")
     cols_to_drop = [
         'location'
     ]
@@ -264,6 +307,7 @@ def extract_holidays(csv_file_path):
     return df
 
 def transform_holidays(date_df: pd.DataFrame) -> pd.DataFrame:
+    pipeline_logging.logger.info("Transforming datetime column to date/day/time/month/year columns")
     date_df['date'] = pd.to_datetime(date_df['date'])
     date_df['day'] = date_df['date'].dt.day
     date_df['month'] = date_df['date'].dt.month
@@ -398,7 +442,7 @@ def create_logs_table(engine:Engine) -> Table:
     table = Table(
         "logs", meta, 
         Column('run_id',Integer,primary_key=True),
-        Column('status',String,primary_key=True),
+        Column('status',String),
         Column('pipeline_name',String),
         Column('timestamp',DateTime(timezone=True)),
         Column('config',JSON),
@@ -449,40 +493,12 @@ if __name__=="__main__":
     if Path(yaml_file_path).exists():
         with open(yaml_file_path) as yaml_file:
             pipeline_config = yaml.safe_load(yaml_file)
-    start_time='2023-12-25T00:00:00.000' 
-    end_time='2023-12-31T23:59:59.999'
-    APP_TOKEN = "ef0oV4r2jOuH9KGAEwWRQfrKl"
-    limit = 20000
-    column_name = "incident_datetime"
-    df = extract_crime_api(APP_TOKEN, column_name, start_time, end_time, limit)
-    # print(df)
-    df_transform_crime = transform_crime_data(df)
-    # print(df_transform)
-    # print(df_transform.columns)
-    # print(df_transform.dtypes)
-    config = pipeline_config.get("config")
-    police_station_data_path = config.get("police_station_data_path")
-    df_police_extract = extract_police_station(police_station_data_path)
-    # print(df_police_extract)
-    # print(df_police_extract.columns)
-    df_police_transform = transform_police_station_data(df_police_extract)
-    # print(df_police_transform)
-    config_holidays = pipeline_config.get("config")
-    holidays_data_path = config_holidays.get("holidays_data_path")
-    df_holidays_extract = extract_holidays(holidays_data_path)
-    # print(df_holidays_extract)
-    df_holidays_transform = transform_holidays(df_holidays_extract)
-    # print(df_holidays_transform)
-    # print("df_holidays_transform.columns")
-    # print(df_holidays_transform.columns)
-
     APP_TOKEN = os.environ.get("APP_TOKEN")
     DB_USERNAME = os.environ.get("DB_USERNAME")
     DB_PASSWORD = os.environ.get("DB_PASSWORD")
     SERVER_NAME = os.environ.get("SERVER_NAME")
     DATABASE_NAME = os.environ.get("DATABASE_NAME")
     PORT = os.environ.get("PORT")
-
     # Connecting to postgres
     engine = create_postgres_connection(
         username=DB_USERNAME, 
@@ -490,6 +506,14 @@ if __name__=="__main__":
         host=SERVER_NAME, 
         port=PORT, 
         database=DATABASE_NAME)
+    config = pipeline_config.get("config")
+
+    log_folder_path=config.get("log_folder_path")
+    pipeline_name=pipeline_config.get("name")
+
+    # Instantiating console logger for pipeline run
+    pipeline_logging = PipelineLogging(pipeline_name=pipeline_name, log_folder_path=log_folder_path)
+
     # print(engine)
     crime_table=create_crime_table(engine=engine)
     # print(crime_table)
@@ -500,6 +524,39 @@ if __name__=="__main__":
     chunksize=config.get("chunksize")
     # Creating table in database for pipeline metadata logs (does not re-create table if it already exists)
     logs_table = create_logs_table(engine=engine)
+    start_time='2023-12-25T00:00:00.000' 
+    end_time='2023-12-31T23:59:59.999'
+    APP_TOKEN = "ef0oV4r2jOuH9KGAEwWRQfrKl"
+    limit = 20000
+    column_name = "incident_datetime"
+    
+    pipeline_logging.logger.info("Extracting SFO crime data")
+    df = extract_crime_api(APP_TOKEN, column_name, start_time, end_time, limit)
+    # print(df)
+    pipeline_logging.logger.info("Transforming SFO crime data")
+    df_transform_crime = transform_crime_data(df)
+    # print(df_transform)
+    # print(df_transform.columns)
+    # print(df_transform.dtypes)
+    police_station_data_path = config.get("police_station_data_path")
+    pipeline_logging.logger.info("Extracting SFO police station data")
+    df_police_extract = extract_police_station(police_station_data_path)
+    # print(df_police_extract)
+    # print(df_police_extract.columns)
+    pipeline_logging.logger.info("Transforming SFO police station data")
+    df_police_transform = transform_police_station_data(df_police_extract)
+    # print(df_police_transform)
+    config_holidays = pipeline_config.get("config")
+    holidays_data_path = config_holidays.get("holidays_data_path")
+    pipeline_logging.logger.info("Extracting California holiday data")
+    df_holidays_extract = extract_holidays(holidays_data_path)
+    # print(df_holidays_extract)
+    pipeline_logging.logger.info("Transforming California holiday data")
+    df_holidays_transform = transform_holidays(df_holidays_extract)
+    # print(df_holidays_transform)
+    # print("df_holidays_transform.columns")
+    # print(df_holidays_transform.columns)
+
     logs_table_name=config.get("logs_table_name")
     # # Extracting next run_id value to be used for writing new records to metadata logs table
     # run_id = get_logs_table_run_id(logs_table_name=logs_table_name, engine=engine)
@@ -530,4 +587,3 @@ if __name__=="__main__":
     # while True:
     #     schedule.run_pending()
     #     time.sleep(pipeline_config.get("schedule").get("poll_seconds"))
-    
