@@ -208,6 +208,10 @@ Screenshot of `.env` file in S3 which was used in the task definition that ran t
 
 ![S3](/images/s3_env_file.png)
 
+### ECS Task
+
+<img width="866" alt="Screenshot 2024-07-26 at 11 59 09 AM" src="https://github.com/user-attachments/assets/bf686da4-62b5-45da-894e-88ede993ff53">
+
 ### ETL flow Logger
 
 <img width="867" alt="Screenshot 2024-07-26 at 11 54 21 AM" src="https://github.com/user-attachments/assets/226277d2-dddb-4277-a444-b698d09d66ba">
