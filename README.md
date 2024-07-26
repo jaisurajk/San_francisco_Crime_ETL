@@ -27,6 +27,7 @@ Examples of these questions include but are not limited to:
 - What time of the day (morning, afternoon, evening, night) seems to have the highest number of crimes?
 - Which holidays have the highest incidences of crime and may require additional staffing or resources?
 - Which police districts may need additional resources, specialized training, etc. based on the type and quantity of crime?
+- Which intersection have the most violent crimes?
 
 Our data will allow our users to make resourcing and policy decisions based on historical and newly generated data.
 
@@ -37,6 +38,7 @@ The chosen live dataset for the project was the [San Francisco Crimes 2018 to Pr
 - The San Francisco Data Portal provides an API endpoint that allows unlimited HTTP requests to extract the dataset.
 - The dataset contains a significant amount of distinct columns (fields) that can then be joined separately with a different dataset to facilitate data aggregations.
 - The dataset also contains system fields that hold metadata information for each record (such as when the row was created, last updated, and a unique identifier for the row).
+- The dataset can be queried prior to extraction based on a SQL-like query language in order to specify which exact data you need (e.g. data created after a specific date).
 
 In addition to the San Francisco Crimes data, we used static datasets for [2023 and 2024 holidays](https://www.sf.gov/information/city-and-county-san-francisco-holiday-schedule) and [San Francisco police stations](https://data.sfgov.org/Public-Safety/Police-Stations-2011-/rwdu-9wb2/about_data). 
 
@@ -44,7 +46,7 @@ In addition to the San Francisco Crimes data, we used static datasets for [2023 
 
 Below is the solution architecture description and diagram, illustrating the key components and their interactions in our project.
 
-![DEC Project 1 Architecture](images/DEC-Project1-architecture.jpg)
+<img width="1001" alt="Screenshot 2024-07-26 at 1 15 19 PM" src="https://github.com/user-attachments/assets/88985838-6a55-4fa6-a8c8-8aee971f4740">
 
 - **Python** was used for:
   - Extracting the crime data, via an API, from the city of chicago website.
