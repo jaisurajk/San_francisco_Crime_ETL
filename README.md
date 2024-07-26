@@ -32,7 +32,7 @@ Our data will allow our users to make resourcing and policy decisions based on h
 
 ## Source datasets
 
-The chosen live dataset for the project was the [Chicago Crimes One Year Prior to Present](https://data.cityofchicago.org/Public-Safety/Crimes-One-year-prior-to-present/x2n5-8w5q/about_data) which stores all reported crime incidents in the city of Chicago, Illinois. This public dataset provides the following advantages:
+The chosen live dataset for the project was the [San Francisco Crimes 2018 to Present](https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-2018-to-Present/wg3w-h783/about_data) which stores all reported crime incidents in the city of Chicago, Illinois. This public dataset provides the following advantages:
 
 - The Chicago Data Portal provides an API endpoint which allows us to make unlimited HTTP requests to extract the dataset.
 - The dataset contains a significant amount of distinct columns (fields) that can then be joined separately with a different dataset to facilitate data aggregations.
