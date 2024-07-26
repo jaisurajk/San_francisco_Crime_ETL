@@ -46,7 +46,7 @@ In addition to the San Francisco Crimes data, we used static datasets for [2023 
 
 Below is the solution architecture description and diagram, illustrating the key components and their interactions in our project.
 
-<img width="1001" alt="Screenshot 2024-07-26 at 1 15 19 PM" src="https://github.com/user-attachments/assets/88985838-6a55-4fa6-a8c8-8aee971f4740">
+<img width="1000" alt="Screenshot 2024-07-26 at 1 20 14 PM" src="https://github.com/user-attachments/assets/7a43b72d-f821-4cb5-8db7-5e70a21eb74a">
 
 - **Python** was used for:
   - Extracting the crime data, via an API, from the city of chicago website.
