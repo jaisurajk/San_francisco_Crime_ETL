@@ -210,6 +210,8 @@ Screenshot of `.env` file in S3 which was used in the task definition that ran t
 
 ### ECS Task
 
+<img width="889" alt="Screenshot 2024-07-26 at 12 00 27 PM" src="https://github.com/user-attachments/assets/ee0d3b94-b515-49bf-bb7d-86022235cea6">
+
 <img width="866" alt="Screenshot 2024-07-26 at 11 59 09 AM" src="https://github.com/user-attachments/assets/bf686da4-62b5-45da-894e-88ede993ff53">
 
 ### ETL flow Logger
