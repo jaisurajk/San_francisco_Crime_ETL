@@ -207,3 +207,8 @@ Screenshot of database in RDS:
 Screenshot of `.env` file in S3 which was used in the task definition that ran the pipeline in ECS:
 
 ![S3](/images/s3_env_file.png)
+
+### Scheduled using cloud watch
+
+<img width="909" alt="Screenshot 2024-07-26 at 11 49 25 AM" src="https://github.com/user-attachments/assets/57e21ee8-14e3-48ce-a52f-dccd9c16c763">
+
