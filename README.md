@@ -38,7 +38,7 @@ The chosen live dataset for the project was the [San Francisco Crimes 2018 to Pr
 - The dataset contains a significant amount of distinct columns (fields) that can then be joined separately with a different dataset to facilitate data aggregations.
 - The dataset also contains system fields that hold metadata information for each record (such as when the row was created, last updated, and a unique identifier for the row).
 
-In addition to the San Francisco Crimes data, we used static datasets for [2023 and 2024 holidays](https://www.chicago.gov/city/en/narr/misc/city-holidays.html), [San Francisco police stations](https://data.cityofchicago.org/Public-Safety/Police-Stations/z8bn-74gv/data_preview) and [Chicago ward offices](https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Ward-Offices/htai-wnw4/data_preview). 
+In addition to the San Francisco Crimes data, we used static datasets for [2023 and 2024 holidays](https://www.sf.gov/information/city-and-county-san-francisco-holiday-schedule) and [San Francisco police stations](https://data.sfgov.org/Public-Safety/Police-Stations-2011-/rwdu-9wb2/about_data). 
 
 ## Solution Architecture Diagram
 
