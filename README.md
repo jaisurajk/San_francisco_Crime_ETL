@@ -10,15 +10,15 @@ The DA/DS person should not be concerned with the accuracy of each data record a
 
 ## Business Objective
 
-The objective of our project is to provide analytical datasets from our Chicago crime API and supporting police, ward and holiday databases. The datasets are clean, regularly updated, and supported with several custom table views generated from these datasets.
+The objective of our project is to provide analytical datasets from our San Francisco crime API and supporting police stations and holiday databases. The datasets are clean, regularly updated, and supported with several custom table views generated from these datasets.
 
 ## Consumers
 
-The users of our data are Chicago city budget and policy analysts and officials. Our data is useful for getting up-to-date information on crimes that occur throughout Chicago. Our users would want to access the data primarily through sql queries and the custom sql views from the database. This data can also be used to create dashboards with maps and metrics.
+The users of our data are San Francisco city budget and policy analysts and officials. Our data is useful for getting up-to-date information on crimes that occur throughout San Francisco. Our users would want to access the data primarily through sql queries and the custom sql views from the database. This data can also be used to create dashboards with maps and metrics.
 
 ## Questions
 
-There are three general question categories our data addresses: broad questions about crime in the city of Chicago, questions about crime incidents during holidays, and crime incidents within police districts.
+There are three general question categories our data addresses: broad questions about crime in the city of San Francisco, questions about crime incidents during holidays, and crime incidents within police districts.
 
 Examples of these questions include but are not limited to:
 
@@ -26,7 +26,6 @@ Examples of these questions include but are not limited to:
 - What month of the year has the most crimes?
 - What time of the day (morning, afternoon, evening, night) seems to have the highest number of crimes?
 - Which holidays have the highest incidences of crime and may require additional staffing or resources?
-- Which beats have the most violent crimes?
 - Which police districts may need additional resources, specialized training, etc. based on the type and quantity of crime?
 
 Our data will allow our users to make resourcing and policy decisions based on historical and newly generated data.
