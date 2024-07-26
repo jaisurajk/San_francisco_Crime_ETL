@@ -32,14 +32,13 @@ Our data will allow our users to make resourcing and policy decisions based on h
 
 ## Source datasets
 
-The chosen live dataset for the project was the [San Francisco Crimes 2018 to Present](https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-2018-to-Present/wg3w-h783/about_data) which stores all reported crime incidents in the city of Chicago, Illinois. This public dataset provides the following advantages:
+The chosen live dataset for the project was the [San Francisco Crimes 2018 to Present](https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-2018-to-Present/wg3w-h783/about_data) which stores all reported crime incidents in the city of San Francisco, California. This public dataset provides the following advantages:
 
-- The Chicago Data Portal provides an API endpoint which allows us to make unlimited HTTP requests to extract the dataset.
+- The San Francisco Data Portal provides an API endpoint that allows unlimited HTTP requests to extract the dataset.
 - The dataset contains a significant amount of distinct columns (fields) that can then be joined separately with a different dataset to facilitate data aggregations.
 - The dataset also contains system fields that hold metadata information for each record (such as when the row was created, last updated, and a unique identifier for the row).
-- The dataset can be queried prior to extraction based on a SQL-like query language in order to specify which exact data you need (e.g. data created after a specific date).
 
-In addition to the Chicago Crimes data, we used static datasets for [2023 and 2024 holidays](https://www.chicago.gov/city/en/narr/misc/city-holidays.html), [Chicago police stations](https://data.cityofchicago.org/Public-Safety/Police-Stations/z8bn-74gv/data_preview) and [Chicago ward offices](https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Ward-Offices/htai-wnw4/data_preview). 
+In addition to the San Francisco Crimes data, we used static datasets for [2023 and 2024 holidays](https://www.chicago.gov/city/en/narr/misc/city-holidays.html), [San Francisco police stations](https://data.cityofchicago.org/Public-Safety/Police-Stations/z8bn-74gv/data_preview) and [Chicago ward offices](https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Ward-Offices/htai-wnw4/data_preview). 
 
 ## Solution Architecture Diagram
 
