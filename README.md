@@ -117,23 +117,23 @@ After downloading the installer, run the installer on your computer.
 
 Select all options for when promoted for the components you wish to install.
 
-![images/postgres-component.png](images/postgres-component.png)
+<img width="687" alt="Screenshot 2024-07-26 at 7 43 00 PM" src="https://github.com/user-attachments/assets/92970851-9696-49b9-986a-7a64d4f38d32">
 
 Enter a password:
 
-![images/postgres-password.png](images/postgres-password.png)
+<img width="692" alt="Screenshot 2024-07-26 at 7 43 57 PM" src="https://github.com/user-attachments/assets/421c1637-6e96-4e76-8bf7-ad68c99a6b21">
 
 Enter a port number. Note: The default port number `5432` is usually used when using PostgreSQL.
 
 When installed successfully, you should be able to find `pgAdmin 4` in your applications.
 
-![images/postgres-success.png](images/postgres-success.png)
+<img width="481" alt="Screenshot 2024-07-26 at 7 44 33 PM" src="https://github.com/user-attachments/assets/de1bb61b-ded6-47cc-8395-ede9e8307348">
 
 ### 2. Clone Repository
 
 Clone the github repository using the options from the `< > Code` drop down menu here:
 
-![clone repo button](/images/clone_git_button.png)
+<img width="533" alt="Screenshot 2024-07-26 at 7 45 11 PM" src="https://github.com/user-attachments/assets/6ac7014d-009e-4e5b-8199-53f1ffd00a3f">
 
 ### 3. Get App Token
 
