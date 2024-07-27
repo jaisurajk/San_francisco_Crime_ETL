@@ -133,7 +133,7 @@ When installed successfully, you should be able to find `pgAdmin 4` in your appl
 
 Clone the github repository using the options from the `< > Code` drop down menu here:
 
-<img width="533" alt="Screenshot 2024-07-26 at 7 45 11 PM" src="https://github.com/user-attachments/assets/6ac7014d-009e-4e5b-8199-53f1ffd00a3f">
+<img width="400" alt="Screenshot 2024-07-26 at 8 05 35 PM" src="https://github.com/user-attachments/assets/dada8b63-9e9f-48bb-b4cf-b0f72d364471">
 
 ### 3. Get App Token
 
@@ -144,7 +144,7 @@ In order to execute the pipeline, an App Token is needed to send requests throug
 Create an `.env` file in the main directory with the following format:
 
 ```py
-# City of Chicago App Token
+# City of San Francisco App Token
 APP_TOKEN=<App Token>
 
 # db
@@ -175,29 +175,23 @@ Docker was used to containerize the pipeline, which was then loaded into AWS ECR
 
 Screenshot of task running:
 
-<img width="1203" alt="Screenshot 2024-07-26 at 7 47 17 PM" src="https://github.com/user-attachments/assets/58765f68-3f63-4227-b19d-5153c632b819">
+<img width="891" alt="Screenshot 2024-07-26 at 8 10 10 PM" src="https://github.com/user-attachments/assets/cce81d20-c8f3-42a3-a561-d07526f8db36">
 
 Screenshot of logs:
 
-<img width="1013" alt="Screenshot 2024-07-26 at 7 47 57 PM" src="https://github.com/user-attachments/assets/225ea489-b88f-4c4e-bee0-fbb8247b8bb4">
+<img width="875" alt="Screenshot 2024-07-26 at 8 11 06 PM" src="https://github.com/user-attachments/assets/46664db5-58c5-443c-8c4e-156427fc4bd6">
 
 ### AWS ECR
 
 Screenshot of image in ECR repository:
 
-<img width="1013" alt="Screenshot 2024-07-26 at 7 48 25 PM" src="https://github.com/user-attachments/assets/9812deea-6bf5-4197-ba7c-e315b61f426f">
+<img width="926" alt="Screenshot 2024-07-26 at 8 11 43 PM" src="https://github.com/user-attachments/assets/dbaa6630-a2be-4f4b-8892-510fece7bf6a">
 
 ### AWS RDS
 
 Screenshot of database in RDS:
 
-<img width="1011" alt="Screenshot 2024-07-26 at 7 48 52 PM" src="https://github.com/user-attachments/assets/e3b67e30-bb17-4532-aabf-e1b1d8da736f">
-
-### S3
-
-Screenshot of `.env` file in S3 which was used in the task definition that ran the pipeline in ECS:
-
-<img width="1008" alt="Screenshot 2024-07-26 at 7 49 16 PM" src="https://github.com/user-attachments/assets/12589058-7f6e-4070-868e-723c35c7028e">
+<img width="895" alt="Screenshot 2024-07-26 at 8 12 25 PM" src="https://github.com/user-attachments/assets/80eebbcf-320c-4dea-b281-cb94164a81ef">
 
 ### ECS Task
 
