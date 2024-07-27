@@ -175,29 +175,29 @@ Docker was used to containerize the pipeline, which was then loaded into AWS ECR
 
 Screenshot of task running:
 
-![ECS task running](/images/ecs_task_running.png)
+<img width="1203" alt="Screenshot 2024-07-26 at 7 47 17 PM" src="https://github.com/user-attachments/assets/58765f68-3f63-4227-b19d-5153c632b819">
 
 Screenshot of logs:
 
-![ECS logs](/images/ecs_logs.png)
+<img width="1013" alt="Screenshot 2024-07-26 at 7 47 57 PM" src="https://github.com/user-attachments/assets/225ea489-b88f-4c4e-bee0-fbb8247b8bb4">
 
 ### AWS ECR
 
 Screenshot of image in ECR repository:
 
-![ECR](/images/ecr_image_in_ecr.png)
+<img width="1013" alt="Screenshot 2024-07-26 at 7 48 25 PM" src="https://github.com/user-attachments/assets/9812deea-6bf5-4197-ba7c-e315b61f426f">
 
 ### AWS RDS
 
 Screenshot of database in RDS:
 
-![RDS](/images/rds_with_database.png)
+<img width="1011" alt="Screenshot 2024-07-26 at 7 48 52 PM" src="https://github.com/user-attachments/assets/e3b67e30-bb17-4532-aabf-e1b1d8da736f">
 
 ### S3
 
 Screenshot of `.env` file in S3 which was used in the task definition that ran the pipeline in ECS:
 
-![S3](/images/s3_env_file.png)
+<img width="1008" alt="Screenshot 2024-07-26 at 7 49 16 PM" src="https://github.com/user-attachments/assets/12589058-7f6e-4070-868e-723c35c7028e">
 
 ### ECS Task
 
