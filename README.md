@@ -71,23 +71,23 @@ Below is the solution architecture description and diagram, illustrating the key
   
 ## ELT/ETL Techniques Applied
 
-We employed Extract, Transform, Load (ETL) and Extract, Load, Transform (ELT) techniques to efficiently process and transform raw data into a format suitable for analysis.
+I employed Extract, Transform, Load (ETL) and Extract, Load, Transform (ELT) techniques to efficiently process and transform raw data into a format suitable for analysis.
 
 ### Extraction Pattern
 
-We are using a live dataset that updates periodically (6 days/week). Our pipeline first checks if the database exists. If the database doesn't exit, for the first time the code runs, the pipeline extracts the data one week at a time, based on the `date_of_occurrence` field, until all data has completed the ETL process and has been loaded into our database, which is hosted and managed on AWS RDS. This serves as a backfill of the database. If the database does exist, the pipeline identifies the max `updated_at` field in the database and extracts data starting from that date to today's date. The extraction pipeline is scheduled to run daily to check if data has been updated.
+I am using a live dataset that updates periodically (daily). My pipeline first checks if the database exists. If the database doesn't exist, for the first time the code runs, the pipeline extracts a thousand records at a time, and moves the offset until the end of the current day's data. Then the pipeline completes the ETL process and loads the data into the database, which is hosted and managed on AWS RDS. This serves as a backfill of the database. 
 
 ### Data Transformation Patterns
 
 #### ETL
 
-There are two places we use data transformation patterns. The first is after the extracion of the crime data and import of the .csv data. We used Pandas to drop columns, change column names and generate the holiday dataframe.
+There are two places I use data transformation patterns. The first is after the extraction of the crime data and import of the .csv data. I used Pandas to drop columns, change column names, and generate the holiday dataframe.
 
 #### ELT
 
-The second set of transformations happens after the data has been loaded into the database. We use sql templates to generate views in the database. These transformation include CTEs, joining, grouping, sorting, and aggregation function. The SQL transformations result in several table views in the database. Our ERD diagram for the tables and views can be seen below:
+The second set of transformations happens after the data has been loaded into the database. I use sql templates to generate views in the database. These transformations include CTEs, joining, grouping, sorting, and aggregation functions. The SQL transformations result in several table views in the database. The below ERD diagram for the tables and views can be seen below:
 
-![DEC Project 1 Architecture](images/chicago-crimes-erd-diagram.jpg)
+<img width="823" alt="Screenshot 2024-07-26 at 7 35 50 PM" src="https://github.com/user-attachments/assets/c0a9d86d-716a-4482-89bb-f27212411a0c">
 
 ### Data Loading Patterns
 
