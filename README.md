@@ -93,15 +93,11 @@ The second set of transformations happens after the data has been loaded into th
 
 Our pipeline extracts, transforms and loads one weeks worth of data at a time until the database has been completely backfilled.
 
-## Data Flow Chart
-
-For more details on project data flow, please see the [Chicago Crime Project Flowchart pdf](images/DEC-Project1-Flowchart.pdf).
-
 ## Limitations and Lessons Learned
 
-Throughout the course of the project, we encountered various challenges and gained valuable insights. Here are some key lessons learnt during the project:
+Throughout the course of the project, I encountered various challenges and gained valuable insights. Here are some key lessons learnt during the project:
 
-- It was very important to us as a group to be able to practice each step of the process. This was extremely valuable in contributing to our learning but did slow us down and may have added additional work or stress toward the end.
+- It was very important for me to be able to practice each step of the process. This was extremely valuable in contributing to our learning but did slow us down and may have added additional work or stress toward the end.
 - We had hoped to eliminate some of the technical debt in the code by making it more modular or object oriented. This is something that can be a follow on task.
 - We started by using Trello to manage tasks but found it worked better for our group to orangize tasks in the issues section of github. We were able to add code, comments and have discussion for each issue.
 - Include a `.dockerignore` file in the directory when building a docker image. If using a secrets file or an `.env` file, make sure to add it to the .dockerignore file so that it isn't included in the image.
