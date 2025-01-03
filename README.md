@@ -97,9 +97,9 @@ Our pipeline extracts, transforms and loads one weeks worth of data at a time un
 
 Throughout the course of the project, I encountered various challenges and gained valuable insights. Here are some key lessons learnt during the project:
 
-- It was very important for me to be able to practice each step of the process. This was extremely valuable in contributing to our learning but did slow us down and may have added additional work or stress toward the end.
-- We had hoped to eliminate some of the technical debt in the code by making it more modular or object oriented. This is something that can be a follow on task.
-- We started by using Trello to manage tasks but found it worked better for our group to orangize tasks in the issues section of github. We were able to add code, comments and have discussion for each issue.
+- It was very important for me to be able to practice each step of the process. This was extremely valuable in contributing to my learning but did slow me down and may have added additional work or stress toward the end.
+- I had hoped to eliminate some of the technical debt in the code by making it more modular or object oriented. This is something that can be a follow on task.
+- I started by using Trello to manage tasks but found it worked better for me to orangize tasks in the issues section of github. I was able to add code, comments and have discussion for each issue.
 - Include a `.dockerignore` file in the directory when building a docker image. If using a secrets file or an `.env` file, make sure to add it to the .dockerignore file so that it isn't included in the image.
 - When running the docker container on ECS, the cluster needs to be set up using a VPC with private subnets and a NAT Gateway. This can be done by searching for VPC on AWS, and then creating a VPC. Without this, I was getting the following error:
 
